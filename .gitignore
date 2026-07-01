@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# Node
+frontend/node_modules/
+npm-debug.log*
+
+# Build
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Uploads (optional)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Summaries (optional)
+backend/summaries/*
+!backend/summaries/.gitkeep
