@@ -21,7 +21,7 @@ def _build_database_uri():
             f"{quote_plus(mysql_password)}@{mysql_host}/{quote_plus(mysql_db)}"
         )
 
-    return "sqlite:///app.db"
+    return "sqlite:///development.db"
 
 
 class Config:
