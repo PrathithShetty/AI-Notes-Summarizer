@@ -1,33 +1,17 @@
-import { useEffect, useState } from "react";
-import API from "./api/api";
+import { Routes, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    API.get("/")
-      .then((res) => {
-        setMessage(res.data.message);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        fontSize: "30px",
-        fontWeight: "bold",
-      }}
-    >
-      {message}
-    </div>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+    );
 }
 
 export default App;
