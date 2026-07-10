@@ -1,0 +1,272 @@
+.dashboard-page {
+    min-height: 100vh;
+    background: #f6f8fc;
+    padding-bottom: 60px;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-title {
+    color: #212529;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #6c757d;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.notes-section {
+    margin-top: 40px;
+}
+
+
+/* Upload Card */
+
+.upload-card {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.upload-title {
+    color: #212529;
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.upload-description {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.upload-drop-zone {
+    width: 100%;
+    min-height: 190px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: #f8f9fa;
+    border: 2px dashed #adb5bd;
+    border-radius: 14px;
+
+    text-align: center;
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.upload-drop-zone:hover {
+    border-color: #0d6efd;
+    background: #f1f6ff;
+    transform: translateY(-2px);
+}
+
+.upload-drop-zone:focus-within {
+    border-color: #0d6efd;
+}
+
+.upload-drop-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.upload-main-text {
+    color: #212529;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.upload-helper-text {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.selected-file-name {
+    max-width: 100%;
+    color: #0d6efd;
+    font-weight: 600;
+    word-break: break-word;
+    margin-bottom: 5px;
+}
+
+.generate-button {
+    min-height: 50px;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 12px 20px;
+}
+
+.upload-zone-disabled {
+    pointer-events: none;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* Loading Panel */
+
+.ai-loading-panel {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    margin-top: 24px;
+    padding: 22px;
+
+    background: #f1f6ff;
+    border: 1px solid #cfe2ff;
+    border-radius: 14px;
+}
+
+.ai-loading-spinner {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.ai-loading-title {
+    color: #212529;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.ai-loading-message {
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 4px;
+}
+
+.ai-loading-helper {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 30px 16px;
+    }
+
+    .dashboard-header {
+        margin-bottom: 30px;
+    }
+
+    .dashboard-title {
+        font-size: 1.7rem;
+    }
+
+    .dashboard-subtitle {
+        font-size: 1rem;
+    }
+
+    .notes-section {
+        margin-top: 30px;
+    }
+
+    .upload-card .card-body {
+        padding: 28px !important;
+    }
+
+    .upload-drop-zone {
+        min-height: 170px;
+        padding: 24px;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 576px) {
+    .dashboard-page {
+        padding-bottom: 30px;
+    }
+
+    .dashboard-container {
+        padding: 24px 12px;
+    }
+
+    .dashboard-header {
+        margin-bottom: 24px;
+    }
+
+    .dashboard-title {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .upload-card {
+        border-radius: 12px;
+    }
+
+    .upload-card .card-body {
+        padding: 20px !important;
+    }
+
+    .upload-icon {
+        font-size: 2rem;
+    }
+
+    .upload-title {
+        font-size: 1.4rem;
+    }
+
+    .upload-description {
+        font-size: 0.95rem;
+    }
+
+    .upload-drop-zone {
+        min-height: 150px;
+        padding: 20px 14px;
+    }
+
+    .generate-button {
+        font-size: 1rem;
+    }
+
+    .ai-loading-panel {
+        flex-direction: column;
+        gap: 14px;
+        padding: 18px;
+        text-align: center;
+    }
+
+    .alert {
+        font-size: 0.9rem;
+    }
+}

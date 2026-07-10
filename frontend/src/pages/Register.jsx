@@ -1,7 +1,10 @@
 import { useState } from "react";
-import API from "../api/axios";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../services/authService";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -19,15 +22,12 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await API.post("/api/auth/register", formData);
+      const response = await registerUser(formData);
 
-      alert(response.data.message);
+      alert(response.message);
 
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-      });
+      // Redirect user to login page after successful registration
+      navigate("/");
 
     } catch (error) {
       alert(
@@ -104,6 +104,7 @@ function Register() {
                 </div>
 
                 <button
+                  type="submit"
                   className="btn btn-primary w-100"
                 >
                   Register

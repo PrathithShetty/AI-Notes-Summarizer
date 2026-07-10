@@ -38,3 +38,4 @@ backend/uploads/*
 # Summaries (optional)
 backend/summaries/*
 !backend/summaries/.gitkeep
+backend/.env

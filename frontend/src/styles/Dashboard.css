@@ -1,0 +1,454 @@
+.study-notes {
+    margin-top: 40px;
+    color: #212529;
+}
+
+
+.study-notes-header {
+    background: #ffffff;
+    border: 1px solid #e6e9ef;
+    border-radius: 18px;
+
+    padding: 32px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+
+.study-notes-label {
+    display: inline-block;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #0d6efd;
+
+    margin-bottom: 10px;
+}
+
+
+.study-notes-title {
+    color: #212529;
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+
+.study-notes-description {
+    color: #6c757d;
+
+    line-height: 1.7;
+
+    margin-bottom: 0;
+}
+
+
+
+.notes-block {
+    background: #ffffff;
+
+    border: 1px solid #e6e9ef;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.notes-section-heading {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 22px;
+
+    border-bottom: 1px solid #e9ecef;
+}
+
+
+.notes-section-icon {
+    font-size: 1.7rem;
+
+    line-height: 1;
+}
+
+
+.notes-section-heading h3 {
+    color: #212529;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    margin: 0 0 5px;
+}
+
+
+.notes-section-heading p {
+    color: #6c757d;
+
+    margin: 0;
+}
+
+
+
+.summary-content {
+    color: #343a40;
+
+    font-size: 1.05rem;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+
+
+/* Important Points */
+
+
+.important-points-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+.important-point-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    background: #f8f9fa;
+
+    border: 1px solid #e9ecef;
+
+    border-radius: 12px;
+
+    padding: 16px;
+}
+
+
+.point-number {
+    flex-shrink: 0;
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #e7f1ff;
+
+    color: #0d6efd;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+.important-point-item p {
+    color: #343a40;
+
+    line-height: 1.6;
+
+    margin: 2px 0 0;
+}
+
+
+
+/* Exam Questions */
+
+
+.exam-question-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+.exam-question-item {
+    background: #f8f9fa;
+
+    border: 1px solid #e9ecef;
+
+    border-radius: 12px;
+
+    padding: 18px;
+}
+
+
+.exam-question-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+
+.question-number {
+    color: #495057;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+}
+
+
+.difficulty-badge {
+    border-radius: 999px;
+
+    padding: 5px 11px;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+}
+
+
+.difficulty-easy {
+    background: #d1e7dd;
+
+    color: #0f5132;
+}
+
+
+.difficulty-medium {
+    background: #fff3cd;
+
+    color: #664d03;
+}
+
+
+.difficulty-hard {
+    background: #f8d7da;
+
+    color: #842029;
+}
+
+
+.difficulty-default {
+    background: #e2e3e5;
+
+    color: #41464b;
+}
+
+
+.exam-question-item p {
+    color: #343a40;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+
+/* Quick Revision */
+
+
+.revision-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.revision-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    background: #f8f9fa;
+
+    border-radius: 10px;
+
+    padding: 14px;
+}
+
+
+.revision-item span {
+    color: #198754;
+
+    font-weight: 700;
+}
+
+
+.revision-item p {
+    color: #343a40;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+
+/* Memory Tricks */
+
+
+.memory-block {
+    background: #fffdf5;
+}
+
+
+.memory-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.memory-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #f1e5b9;
+
+    border-radius: 12px;
+
+    padding: 16px;
+}
+
+
+.memory-number {
+    flex-shrink: 0;
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #fff3cd;
+
+    color: #664d03;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+.memory-item p {
+    color: #343a40;
+
+    line-height: 1.7;
+
+    white-space: pre-line;
+
+    margin: 2px 0 0;
+}
+
+
+
+.notes-empty-message {
+    color: #6c757d;
+
+    margin-bottom: 0;
+}
+
+
+
+/* Tablet */
+
+
+@media (max-width: 768px) {
+
+    .important-points-grid,
+    .revision-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .study-notes-header,
+    .notes-block {
+        padding: 22px;
+
+        border-radius: 14px;
+    }
+
+
+    .study-notes-title {
+        font-size: 1.6rem;
+    }
+
+}
+
+
+
+/* Mobile */
+
+
+@media (max-width: 576px) {
+
+    .exam-question-top {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .notes-section-heading {
+        gap: 10px;
+    }
+
+
+    .notes-section-heading h3 {
+        font-size: 1.2rem;
+    }
+
+}
