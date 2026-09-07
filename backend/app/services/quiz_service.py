@@ -3,7 +3,6 @@ import json
 import google.generativeai as genai
 
 from config import Config
-from app.utils.pdf_utils import extract_text_from_pdf
 
 
 genai.configure(api_key=Config.GEMINI_API_KEY)
@@ -11,12 +10,10 @@ genai.configure(api_key=Config.GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-flash-latest")
 
 
-def generate_quiz_from_pdf(pdf_path):
+def generate_quiz_from_text(extracted_text):
     """
-    Extract text from a PDF and generate a comprehensive MCQ quiz.
+    Generate a comprehensive MCQ quiz from already-extracted PDF text.
     """
-
-    extracted_text = extract_text_from_pdf(pdf_path)
 
     if not extracted_text or not extracted_text.strip():
         raise ValueError("No readable text was found in the PDF.")

@@ -1,18 +1,16 @@
-import os
-
-from app.utils.pdf_utils import extract_text_from_pdf
+from app.utils.pdf_utils import extract_text_from_pdf_bytes
 from app.services.ai_service import generate_summary
 
 
-def process_pdf(filename):
+def process_pdf(pdf_bytes):
     """
-    Extract text from a PDF and generate an AI summary.
+    Extract text from an in-memory PDF and generate an AI summary.
+    Returns both, since the extracted text is stored on the Note so
+    quiz generation can reuse it without touching the original file.
     """
 
-    pdf_path = os.path.join("uploads", filename)
-
-    extracted_text = extract_text_from_pdf(pdf_path)
+    extracted_text = extract_text_from_pdf_bytes(pdf_bytes)
 
     ai_summary = generate_summary(extracted_text)
 
-    return ai_summary
+    return extracted_text, ai_summary

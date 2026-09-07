@@ -16,6 +16,14 @@ class Note(db.Model):
         nullable=False
     )
 
+    # Extracted PDF text, stored so quiz generation never needs to
+    # re-read the original file (serverless deployments have no
+    # persistent disk between requests).
+    full_text = db.Column(
+        db.Text,
+        nullable=True
+    )
+
     summary = db.Column(
         db.Text,
         nullable=False

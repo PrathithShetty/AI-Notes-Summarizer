@@ -1,5 +1,3 @@
-import os
-
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.utils import secure_filename
@@ -10,11 +8,6 @@ from app.services.pdf_service import process_pdf
 
 
 pdf_bp = Blueprint("pdf", __name__)
-
-
-UPLOAD_FOLDER = "uploads"
-
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 @pdf_bp.route("/upload", methods=["POST"])
@@ -59,30 +52,26 @@ def upload_pdf():
         }), 400
 
 
-    # Create safe filename
+    # Create safe filename (kept only as display metadata; the file
+    # itself is never written to disk)
     filename = secure_filename(file.filename)
 
 
-    # Create complete file path
-    filepath = os.path.join(
-        UPLOAD_FOLDER,
-        filename
-    )
-
-
-    # Save uploaded PDF
-    file.save(filepath)
+    # Read the upload entirely into memory
+    pdf_bytes = file.read()
 
 
     try:
 
-        # Generate AI notes from PDF
-        ai_summary = process_pdf(filename)
+        # Extract text and generate AI notes from the in-memory PDF
+        extracted_text, ai_summary = process_pdf(pdf_bytes)
 
 
         # Create database Note object
         new_note = Note(
             filename=filename,
+
+            full_text=extracted_text,
 
             summary=ai_summary.get(
                 "summary",

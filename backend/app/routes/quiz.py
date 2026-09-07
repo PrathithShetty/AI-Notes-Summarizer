@@ -1,22 +1,18 @@
-import os
-
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.models.note import Note
-from app.services.quiz_service import generate_quiz_from_pdf
+from app.services.quiz_service import generate_quiz_from_text
 
 
 quiz_bp = Blueprint("quiz", __name__)
-
-UPLOAD_FOLDER = "uploads"
 
 
 @quiz_bp.route("/generate/<int:note_id>", methods=["POST"])
 @jwt_required()
 def generate_quiz(note_id):
     """
-    Generate a quiz from the PDF associated with a saved note.
+    Generate a quiz from the text extracted at upload time for a saved note.
     Only the owner of the note can generate the quiz.
     """
 
@@ -40,25 +36,17 @@ def generate_quiz(note_id):
         }), 403
 
 
-    # Build path to original uploaded PDF
-    pdf_path = os.path.join(
-        UPLOAD_FOLDER,
-        note.filename
-    )
-
-
-    # Make sure the PDF still exists
-    if not os.path.exists(pdf_path):
+    if not note.full_text:
         return jsonify({
             "status": "error",
-            "message": "Original PDF file not found"
+            "message": "No extracted text is available for this note. Please re-upload the PDF."
         }), 404
 
 
     try:
 
-        # Send PDF content to Gemini and generate quiz
-        quiz_data = generate_quiz_from_pdf(pdf_path)
+        # Send stored extracted text to Gemini and generate quiz
+        quiz_data = generate_quiz_from_text(note.full_text)
 
 
         return jsonify({

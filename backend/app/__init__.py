@@ -24,6 +24,11 @@ def create_app():
     from app.models.user import User
     from app.models.note import Note
 
+    # Create any missing tables. Safe to run on every cold start:
+    # create_all() only creates tables that don't already exist yet.
+    with app.app_context():
+        db.create_all()
+
     # Import blueprints
     from app.routes.auth import auth_bp
     from app.routes.pdf import pdf_bp
