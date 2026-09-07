@@ -1,4 +1,12 @@
 import { useRef, useState } from "react";
+import {
+    FiFileText,
+    FiUploadCloud,
+    FiCpu,
+    FiAlertCircle,
+    FiCheckCircle,
+} from "react-icons/fi";
+
 import { uploadPDF } from "../services/pdfService";
 
 function UploadCard({ onSummaryGenerated }) {
@@ -6,12 +14,11 @@ function UploadCard({ onSummaryGenerated }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [isDragActive, setIsDragActive] = useState(false);
 
     const fileInputRef = useRef(null);
 
-    const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-
+    const acceptFile = (selectedFile) => {
         setError("");
         setSuccess("");
 
@@ -25,12 +32,47 @@ function UploadCard({ onSummaryGenerated }) {
 
             setError("Please select a valid PDF file.");
 
-            e.target.value = "";
-
             return;
         }
 
         setFile(selectedFile);
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+
+        acceptFile(selectedFile);
+
+        if (!selectedFile || selectedFile.type !== "application/pdf") {
+            e.target.value = "";
+        }
+    };
+
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+
+        if (!loading) {
+            setIsDragActive(true);
+        }
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragActive(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragActive(false);
+
+        if (loading) {
+            return;
+        }
+
+        const droppedFile = e.dataTransfer.files?.[0];
+
+        acceptFile(droppedFile);
     };
 
 
@@ -132,7 +174,7 @@ function UploadCard({ onSummaryGenerated }) {
                 <div className="text-center mb-4">
 
                     <div className="upload-icon">
-                        📄
+                        <FiFileText />
                     </div>
 
                     <h2 className="upload-title">
@@ -155,8 +197,15 @@ function UploadCard({ onSummaryGenerated }) {
                             loading
                                 ? "upload-zone-disabled"
                                 : ""
+                        } ${
+                            isDragActive
+                                ? "upload-drop-zone-active"
+                                : ""
                         }`
                     }
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
                 >
 
                     <input
@@ -169,16 +218,19 @@ function UploadCard({ onSummaryGenerated }) {
                     />
 
                     <div className="upload-drop-icon">
-                        📤
+                        <FiUploadCloud />
                     </div>
 
 
                     {file ? (
 
                         <>
-                            <p className="selected-file-name">
-                                {file.name}
-                            </p>
+                            <div className="selected-file-row">
+                                <FiFileText />
+                                <span className="selected-file-name">
+                                    {file.name}
+                                </span>
+                            </div>
 
                             <p className="upload-helper-text">
                                 Click here to choose another PDF.
@@ -189,7 +241,7 @@ function UploadCard({ onSummaryGenerated }) {
 
                         <>
                             <p className="upload-main-text">
-                                Click to choose a PDF
+                                Drag & drop a PDF, or click to browse
                             </p>
 
                             <p className="upload-helper-text">
@@ -207,11 +259,14 @@ function UploadCard({ onSummaryGenerated }) {
                 {error && (
 
                     <div
-                        className="alert alert-danger mt-3 mb-0"
+                        className="alert alert-danger mt-3 mb-0 d-flex align-items-start gap-2"
                         role="alert"
                     >
-                        <strong>Generation failed.</strong>{" "}
-                        {error}
+                        <FiAlertCircle size={18} className="mt-1 flex-shrink-0" />
+                        <div>
+                            <strong>Generation failed.</strong>{" "}
+                            {error}
+                        </div>
                     </div>
 
                 )}
@@ -222,11 +277,14 @@ function UploadCard({ onSummaryGenerated }) {
                 {success && (
 
                     <div
-                        className="alert alert-success mt-3 mb-0"
+                        className="alert alert-success mt-3 mb-0 d-flex align-items-start gap-2"
                         role="status"
                     >
-                        <strong>Success!</strong>{" "}
-                        {success}
+                        <FiCheckCircle size={18} className="mt-1 flex-shrink-0" />
+                        <div>
+                            <strong>Success!</strong>{" "}
+                            {success}
+                        </div>
                     </div>
 
                 )}
@@ -245,7 +303,12 @@ function UploadCard({ onSummaryGenerated }) {
 
                         {loading
                             ? "Generating AI Notes..."
-                            : "🤖 Generate AI Notes"
+                            : (
+                                <>
+                                    <FiCpu />
+                                    Generate AI Notes
+                                </>
+                            )
                         }
 
                     </button>
@@ -275,7 +338,7 @@ function UploadCard({ onSummaryGenerated }) {
                         <div>
 
                             <h4 className="ai-loading-title">
-                                🤖 Generating Your Study Notes
+                                <FiCpu /> Generating Your Study Notes
                             </h4>
 
                             <p className="ai-loading-message">

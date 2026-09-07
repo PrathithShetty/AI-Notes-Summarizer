@@ -1,6 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  FiBookOpen,
+  FiUser,
+  FiMail,
+  FiLock,
+  FiEye,
+  FiEyeOff,
+  FiAlertCircle,
+  FiCheckCircle,
+} from "react-icons/fi";
+
 import { registerUser } from "../services/authService";
+
+import "../styles/Auth.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -10,6 +23,11 @@ function Register() {
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -21,105 +39,154 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (loading) {
+      return;
+    }
+
     try {
+      setLoading(true);
+      setError("");
+      setSuccess("");
+
       const response = await registerUser(formData);
 
-      alert(response.message);
+      setSuccess(response.message || "Account created successfully.");
 
-      // Redirect user to login page after successful registration
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 900);
 
-    } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Registration Failed"
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        "Registration failed. Please try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container mt-5">
+    <div className="auth-page">
+      <div className="auth-blob auth-blob-1" />
+      <div className="auth-blob auth-blob-2" />
+      <div className="auth-blob auth-blob-3" />
 
-      <div className="row justify-content-center">
+      <div className="auth-card">
 
-        <div className="col-md-5">
-
-          <div className="card shadow">
-
-            <div className="card-body">
-
-              <h2 className="text-center mb-4">
-                AI Notes Summarizer
-              </h2>
-
-              <h5 className="text-center mb-4">
-                Register
-              </h5>
-
-              <form onSubmit={handleSubmit}>
-
-                <div className="mb-3">
-                  <label className="form-label">
-                    Username
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">
-                    Email
-                  </label>
-
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">
-                    Password
-                  </label>
-
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100"
-                >
-                  Register
-                </button>
-
-              </form>
-
-            </div>
-
+        <div className="auth-brand">
+          <div className="auth-brand-icon">
+            <FiBookOpen />
           </div>
 
+          <h1>AI Notes Summarizer</h1>
+          <p>Create an account to start generating study notes.</p>
+        </div>
+
+        {error && (
+          <div className="auth-alert auth-alert-error" role="alert">
+            <FiAlertCircle size={18} />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {success && (
+          <div className="auth-alert auth-alert-success" role="status">
+            <FiCheckCircle size={18} />
+            <span>{success}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <div className="auth-field">
+            <label htmlFor="username">Username</label>
+
+            <div className="auth-input-wrapper">
+              <span className="auth-input-icon">
+                <FiUser />
+              </span>
+
+              <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Choose a username"
+                value={formData.username}
+                onChange={handleChange}
+                autoComplete="username"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="auth-field">
+            <label htmlFor="email">Email</label>
+
+            <div className="auth-input-wrapper">
+              <span className="auth-input-icon">
+                <FiMail />
+              </span>
+
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                autoComplete="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="auth-field">
+            <label htmlFor="password">Password</label>
+
+            <div className="auth-input-wrapper">
+              <span className="auth-input-icon">
+                <FiLock />
+              </span>
+
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                className="has-toggle"
+                name="password"
+                placeholder="Create a password"
+                value={formData.password}
+                onChange={handleChange}
+                autoComplete="new-password"
+                required
+              />
+
+              <button
+                type="button"
+                className="auth-password-toggle"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                tabIndex={-1}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="auth-submit-button"
+            disabled={loading}
+          >
+            {loading && <span className="auth-spinner" />}
+            {loading ? "Creating account..." : "Register"}
+          </button>
+        </form>
+
+        <div className="auth-switch">
+          Already have an account? <Link to="/">Login</Link>
         </div>
 
       </div>
-
     </div>
   );
 }

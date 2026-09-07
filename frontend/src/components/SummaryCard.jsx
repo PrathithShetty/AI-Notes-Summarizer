@@ -1,5 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+    FiCpu,
+    FiFileText,
+    FiStar,
+    FiHelpCircle,
+    FiZap,
+    FiCheck,
+    FiCopy,
+    FiCheckCircle,
+} from "react-icons/fi";
+import { FaBrain } from "react-icons/fa";
 
 import { generateQuiz } from "../services/quizService";
 
@@ -12,6 +23,7 @@ function SummaryCard({ notes, noteId }) {
 
     const [quizLoading, setQuizLoading] = useState(false);
     const [quizError, setQuizError] = useState("");
+    const [copied, setCopied] = useState(false);
 
     if (!notes) {
         return null;
@@ -155,6 +167,25 @@ function SummaryCard({ notes, noteId }) {
     };
 
 
+    const handleCopySummary = async () => {
+
+        try {
+
+            await navigator.clipboard.writeText(summary);
+
+            setCopied(true);
+
+            setTimeout(() => setCopied(false), 2000);
+
+        } catch (error) {
+
+            console.error("COPY SUMMARY ERROR:", error);
+
+        }
+
+    };
+
+
     return (
 
         <article className="study-notes">
@@ -169,7 +200,10 @@ function SummaryCard({ notes, noteId }) {
                 </span>
 
                 <h2 className="study-notes-title">
-                    🤖 AI Study Notes
+                    <span className="study-notes-title-icon">
+                        <FiCpu />
+                    </span>
+                    AI Study Notes
                 </h2>
 
                 <p className="study-notes-description">
@@ -183,23 +217,27 @@ function SummaryCard({ notes, noteId }) {
 
             {/* Quiz Action */}
 
-            <section className="notes-block">
+            <section className="notes-block accent-purple">
 
                 <div className="notes-section-heading">
 
-                    <span className="notes-section-icon">
-                        🧠
-                    </span>
+                    <div className="notes-section-heading-main">
 
-                    <div>
+                        <span className="notes-section-icon icon-purple">
+                            <FaBrain />
+                        </span>
 
-                        <h3>
-                            Test Your Knowledge
-                        </h3>
+                        <div>
 
-                        <p>
-                            Generate a comprehensive AI quiz from this PDF.
-                        </p>
+                            <h3>
+                                Test Your Knowledge
+                            </h3>
+
+                            <p>
+                                Generate a comprehensive AI quiz from this PDF.
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -208,7 +246,7 @@ function SummaryCard({ notes, noteId }) {
 
                 <button
                     type="button"
-                    className="btn btn-primary btn-lg"
+                    className="btn btn-primary btn-lg d-inline-flex align-items-center gap-2"
                     onClick={handleTakeQuiz}
                     disabled={quizLoading || !noteId}
                 >
@@ -216,7 +254,12 @@ function SummaryCard({ notes, noteId }) {
                     {
                         quizLoading
                             ? "Generating Quiz..."
-                            : "🧠 Take Quiz"
+                            : (
+                                <>
+                                    <FaBrain />
+                                    Take Quiz
+                                </>
+                            )
                     }
 
                 </button>
@@ -244,7 +287,7 @@ function SummaryCard({ notes, noteId }) {
                         <div>
 
                             <h4 className="ai-loading-title">
-                                🧠 Creating Your Quiz
+                                <FaBrain /> Creating Your Quiz
                             </h4>
 
                             <p className="ai-loading-message">
@@ -286,25 +329,40 @@ function SummaryCard({ notes, noteId }) {
 
             {/* Summary */}
 
-            <section className="notes-block">
+            <section className="notes-block accent-blue">
 
                 <div className="notes-section-heading">
 
-                    <span className="notes-section-icon">
-                        📝
-                    </span>
+                    <div className="notes-section-heading-main">
 
-                    <div>
+                        <span className="notes-section-icon icon-blue">
+                            <FiFileText />
+                        </span>
 
-                        <h3>
-                            Summary
-                        </h3>
+                        <div>
 
-                        <p>
-                            A beginner-friendly explanation of the study material.
-                        </p>
+                            <h3>
+                                Summary
+                            </h3>
+
+                            <p>
+                                A beginner-friendly explanation of the study material.
+                            </p>
+
+                        </div>
 
                     </div>
+
+                    <button
+                        type="button"
+                        className={`notes-copy-button ${copied ? "copied" : ""}`}
+                        onClick={handleCopySummary}
+                    >
+                        {copied
+                            ? (<><FiCheckCircle /> Copied</>)
+                            : (<><FiCopy /> Copy</>)
+                        }
+                    </button>
 
                 </div>
 
@@ -319,23 +377,27 @@ function SummaryCard({ notes, noteId }) {
 
             {/* Important Points */}
 
-            <section className="notes-block">
+            <section className="notes-block accent-amber">
 
                 <div className="notes-section-heading">
 
-                    <span className="notes-section-icon">
-                        ⭐
-                    </span>
+                    <div className="notes-section-heading-main">
 
-                    <div>
+                        <span className="notes-section-icon icon-amber">
+                            <FiStar />
+                        </span>
 
-                        <h3>
-                            Important Points
-                        </h3>
+                        <div>
 
-                        <p>
-                            The most useful concepts to remember.
-                        </p>
+                            <h3>
+                                Important Points
+                            </h3>
+
+                            <p>
+                                The most useful concepts to remember.
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -381,23 +443,27 @@ function SummaryCard({ notes, noteId }) {
 
             {/* Exam Questions */}
 
-            <section className="notes-block">
+            <section className="notes-block accent-rose">
 
                 <div className="notes-section-heading">
 
-                    <span className="notes-section-icon">
-                        ❓
-                    </span>
+                    <div className="notes-section-heading-main">
 
-                    <div>
+                        <span className="notes-section-icon icon-rose">
+                            <FiHelpCircle />
+                        </span>
 
-                        <h3>
-                            Exam Questions
-                        </h3>
+                        <div>
 
-                        <p>
-                            Practice questions organized by difficulty.
-                        </p>
+                            <h3>
+                                Exam Questions
+                            </h3>
+
+                            <p>
+                                Practice questions organized by difficulty.
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -482,23 +548,27 @@ function SummaryCard({ notes, noteId }) {
 
             {/* Quick Revision */}
 
-            <section className="notes-block">
+            <section className="notes-block accent-teal">
 
                 <div className="notes-section-heading">
 
-                    <span className="notes-section-icon">
-                        ⚡
-                    </span>
+                    <div className="notes-section-heading-main">
 
-                    <div>
+                        <span className="notes-section-icon icon-teal">
+                            <FiZap />
+                        </span>
 
-                        <h3>
-                            Quick Revision
-                        </h3>
+                        <div>
 
-                        <p>
-                            Short notes for last-minute revision.
-                        </p>
+                            <h3>
+                                Quick Revision
+                            </h3>
+
+                            <p>
+                                Short notes for last-minute revision.
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -517,7 +587,7 @@ function SummaryCard({ notes, noteId }) {
                             >
 
                                 <span>
-                                    ✓
+                                    <FiCheck />
                                 </span>
 
                                 <p>
@@ -550,8 +620,10 @@ function SummaryCard({ notes, noteId }) {
 
                     <div className="notes-section-heading">
 
-                        <span className="notes-section-icon">
-                            🧠
+                      <div className="notes-section-heading-main">
+
+                        <span className="notes-section-icon icon-amber">
+                            <FaBrain />
                         </span>
 
                         <div>
@@ -565,6 +637,8 @@ function SummaryCard({ notes, noteId }) {
                             </p>
 
                         </div>
+
+                      </div>
 
                     </div>
 

@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+    FiTarget,
+    FiRefreshCw,
+    FiArrowLeft,
+    FiArrowRight,
+    FiCheckCircle,
+} from "react-icons/fi";
+import { BiBulb } from "react-icons/bi";
 
 import "../styles/Quiz.css";
 
@@ -392,7 +400,7 @@ function Quiz() {
 
 
                         <div className="quiz-result-icon">
-                            🎯
+                            <FiTarget />
                         </div>
 
 
@@ -406,7 +414,17 @@ function Quiz() {
                         </h1>
 
 
-                        <div className="quiz-score-circle">
+                        <div
+                            className={
+                                `quiz-score-circle ${
+                                    resultPercentage >= 80
+                                        ? "score-high"
+                                        : resultPercentage >= 60
+                                            ? "score-medium"
+                                            : "score-low"
+                                }`
+                            }
+                        >
 
 
                             <span className="quiz-score-percentage">
@@ -452,7 +470,7 @@ function Quiz() {
 
                                 type="button"
 
-                                className="btn btn-primary"
+                                className="btn btn-primary d-inline-flex align-items-center gap-2"
 
                                 onClick={
                                     handleRetakeQuiz
@@ -460,7 +478,7 @@ function Quiz() {
 
                             >
 
-                                🔄 Retake Quiz
+                                <FiRefreshCw /> Retake Quiz
 
                             </button>
 
@@ -469,7 +487,7 @@ function Quiz() {
 
                                 type="button"
 
-                                className="btn btn-outline-secondary"
+                                className="btn btn-outline-secondary d-inline-flex align-items-center gap-2"
 
                                 onClick={
                                     handleBackToDashboard
@@ -477,7 +495,7 @@ function Quiz() {
 
                             >
 
-                                ← Back to Dashboard
+                                <FiArrowLeft /> Back to Dashboard
 
                             </button>
 
@@ -691,9 +709,9 @@ function Quiz() {
                                                 <div className="quiz-explanation">
 
 
-                                                    <strong>
+                                                    <strong className="d-inline-flex align-items-center gap-2">
 
-                                                        💡 Explanation
+                                                        <BiBulb /> Explanation
 
                                                     </strong>
 
@@ -766,7 +784,7 @@ function Quiz() {
 
                         type="button"
 
-                        className="quiz-back-button"
+                        className="quiz-back-button d-inline-flex align-items-center gap-2"
 
                         onClick={
                             handleBackToDashboard
@@ -774,7 +792,7 @@ function Quiz() {
 
                     >
 
-                        ← Dashboard
+                        <FiArrowLeft /> Dashboard
 
                     </button>
 
@@ -1106,7 +1124,7 @@ function Quiz() {
                 {/* CURRENT QUESTION */}
 
 
-                <section className="quiz-question-card">
+                <section className="quiz-question-card" key={currentQuestionIndex}>
 
 
                     <div className="quiz-question-top">
@@ -1284,7 +1302,7 @@ function Quiz() {
 
                         type="button"
 
-                        className="btn btn-outline-secondary"
+                        className="btn btn-outline-secondary d-inline-flex align-items-center gap-2"
 
                         onClick={
                             handlePrevious
@@ -1296,7 +1314,7 @@ function Quiz() {
 
                     >
 
-                        ← Previous
+                        <FiArrowLeft /> Previous
 
                     </button>
 
@@ -1321,7 +1339,7 @@ function Quiz() {
 
                                     type="button"
 
-                                    className="btn btn-primary"
+                                    className="btn btn-primary d-inline-flex align-items-center gap-2"
 
                                     onClick={
                                         handleNext
@@ -1329,7 +1347,7 @@ function Quiz() {
 
                                 >
 
-                                    Next →
+                                    Next <FiArrowRight />
 
                                 </button>
 
@@ -1341,7 +1359,7 @@ function Quiz() {
 
                                     type="button"
 
-                                    className="btn btn-success"
+                                    className="btn btn-success d-inline-flex align-items-center gap-2"
 
                                     onClick={
                                         handleSubmitQuiz
@@ -1349,7 +1367,7 @@ function Quiz() {
 
                                 >
 
-                                    ✓ Submit Quiz
+                                    <FiCheckCircle /> Submit Quiz
 
                                 </button>
 

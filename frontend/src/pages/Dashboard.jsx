@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiBookOpen } from "react-icons/fi";
 
 import Navbar from "../components/Navbar";
 import UploadCard from "../components/UploadCard";
@@ -38,8 +39,12 @@ function Dashboard() {
 
                 <header className="dashboard-header">
 
+                    <div className="dashboard-header-icon">
+                        <FiBookOpen />
+                    </div>
+
                     <h1 className="dashboard-title">
-                        👋 Welcome to AI Notes
+                        Welcome to AI Notes
                     </h1>
 
                     <p className="dashboard-subtitle">

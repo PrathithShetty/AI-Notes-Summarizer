@@ -1,0 +1,150 @@
+.app-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    background: linear-gradient(90deg, #0f172a, #1e1b4b, #0f172a);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.app-navbar-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 14px 20px;
+}
+
+.app-navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.app-navbar-brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #ffffff;
+
+    font-size: 1.05rem;
+
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.app-navbar-brand:hover .app-navbar-brand-icon {
+    transform: rotate(-8deg) scale(1.08);
+}
+
+.app-navbar-brand-text {
+    font-size: 1.08rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.app-navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.app-navbar-link {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.app-navbar-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+.app-navbar-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.55), rgba(124, 58, 237, 0.55));
+}
+
+.app-navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.app-navbar-logout {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: transparent;
+
+    color: #e2e8f0;
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.app-navbar-logout:hover {
+    background: rgba(225, 29, 72, 0.14);
+    border-color: rgba(251, 113, 133, 0.5);
+    color: #fecdd3;
+    transform: translateY(-1px);
+}
+
+.app-navbar-logout:active {
+    transform: translateY(0) scale(0.96);
+}
+
+@media (max-width: 576px) {
+    .app-navbar-inner {
+        padding: 12px 16px;
+    }
+
+    .app-navbar-brand-text {
+        display: none;
+    }
+
+    .app-navbar-link span {
+        display: none;
+    }
+
+    .app-navbar-logout span {
+        display: none;
+    }
+}
