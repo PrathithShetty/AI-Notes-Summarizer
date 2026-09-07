@@ -9,7 +9,7 @@ genai.configure(api_key=Config.GEMINI_API_KEY)
 
 
 # Load Gemini Model
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-flash-latest")
 
 
 def generate_summary(text):
